@@ -6,9 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <script type="text/javascript" src="index.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+  
 </head>
 <body>
+
+  <div class="form-container">
+
+    <form id="create-user-form">
+      <h3>Add a Customer!</h3>
+
+      <input id="input-first-name" type="text" name="first_name" value=""
+      placeholder="Enter first name" class="input-text">
+      <input id="input-last-name" type="text" name="last_name" value=""
+      placeholder="Enter last name" class="input-text">
+      <br>
+      <input id="input-address" type="text" name="address1" value=""
+      placeholder="Enter address" class="input-text">
+      <br>
+      <input id="input-phone-number" type="text" name="phone-number" value=""
+      placeholder="Enter phone number" clas s="input-text">
+      <br>
+      <input id="input-number-of-pianos" type="text" name="number_of_pianos" value=""
+      placeholder="Enter customer"s number of pianos" class="input-text">
+      <br>
+      <!-- <textarea id="input-notes" type="text" rows="8" cols="80" name="notes" value=""
+      placeholder="Technical notes" class="input-text"></textarea> -->
+      <br>
+      Choose a piano:<select id="pianos" name="pianos">
+      </select>
+      <br>
+
+      <input id="add-button" type="submit" name="submit" value="Add New User" class="submit">  
+    </form>
+  </div>
+    <div id="user-container"></div>
   
 </body>
 </html>

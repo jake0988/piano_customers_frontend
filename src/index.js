@@ -38,31 +38,21 @@ function postFetch(first_name, last_name, address, phone_number, number_of_piano
 .then(resp => resp.json())
 .then(user => {
   const rUser = user.data
-  renderUser(rUser)
+  const newUser = new User(rUser, rUser.attributes)
+  document.getElementById("user-container").innerHTML += newUser.renderUser()
 })
 .catch(err => console.log(err))
 }
 
-function renderUser(user) {
-  debugger
-  const userMarkup = `
-  <div data-id=${user.id}>
-  <h3>${user.attributes.first_name} ${user.attributes.last_name}</h3>
-  <p>number_of_pianos: ${user.attributes.number_of_pianos}</p>
-  <p>phone_number: ${user.attributes.phone_number}</p>
-  <p>technician_notes: ${user.attributes.technician_notes}</p>
- <button data-id=${user.id}>edit</button>
-  <hr>
- </div>`
- document.getElementById("user-container").innerHTML += userMarkup
-}
+
 
 function getUsers() {
   fetch(endPoint)
     .then(resp => resp.json())
     .then(users => {
       users.data.forEach(user => {
-        renderUser(user)
+        let newUser = new User(user, user.attributes)
+        document.getElementById("user-container").innerHTML += newUser.renderUser()
       })
   })
 }

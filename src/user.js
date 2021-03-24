@@ -17,7 +17,7 @@ class User {
     <p>number_of_pianos: ${this.number_of_pianos}</p>
     <p>phone_number: ${this.phone_number}</p>
     <p>technician_notes: ${this.technician_notes}</p>
-   <button data-id=${this.id}>edit</button>
+   <button data-id=${this.id} input type="submit" name="edit">edit</button>
     <hr>
    </div>`
   }

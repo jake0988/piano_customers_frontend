@@ -4,14 +4,16 @@ document.addEventListener('DOMContentLoaded', function () {
     getUsers()
     // createForm()
    const addUserForm = document.querySelector('#add-user-form')
-  
+   
    addUserForm.addEventListener('submit', (e) => {
- 
       eventFormHandler(e)
- 
-      console.log(e, "This was submitted")
    }
     )
+    document.getElementByName('edit').addEventListener('submit', (e) => {
+      debugger
+      console.log(e, "This was submitted")
+      
+   })
   }
 )
 

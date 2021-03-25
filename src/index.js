@@ -7,15 +7,19 @@ document.addEventListener('DOMContentLoaded', function () {
    
    addUserForm.addEventListener('submit', (e) => {
       eventFormHandler(e)
-   }
-    )
-    document.getElementByName('edit').addEventListener('submit', (e) => {
-      debugger
-      console.log(e, "This was submitted")
-      
    })
-  }
-)
+  document.getElementById('user-container').addEventListener('click', (e) => {
+     //can't attach the listener to the edit button.
+     updateUser(e)
+   })
+})
+
+function updateUser(e) {
+  const dataId = e.target.dataset.id
+  const user = User.findUser(dataId)
+  document.getElementById("user-container").innerHTML = user.renderUpdateUser()
+  // user form still shows
+}
 
 function eventFormHandler(e) {
   e.preventDefault()
@@ -54,7 +58,8 @@ function getUsers() {
     .then(users => {
       users.data.forEach(user => {
         let newUser = new User(user, user.attributes)
-        document.getElementById("user-container").innerHTML += newUser.renderUser()
+        const userContainer = document.getElementById("user-container")
+        userContainer.innerHTML += newUser.renderUser()
       })
   })
 }
@@ -64,4 +69,15 @@ function createForm() {
   const option = document.createElement('option')
   option.innerText = "OPTION"
   select.appendChild(option)
+}
+
+function patchUser(first_name, last_name, address, phone_number, number_of_pianos, notes) {
+  const bodyData = {first_name, last_name, address, phone_number, number_of_pianos, notes}
+  fetch(endPoint, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bodyData)
+  })
+  .then(resp => resp.json())
+  .then(jsonData => console.log(jsonData))
 }

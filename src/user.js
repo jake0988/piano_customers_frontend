@@ -25,7 +25,7 @@ class User {
 
   renderUpdateUser() {
     return `
-    <form data-id=${this.id}>
+    <form id="user-patch-form">
     <label="First Name">
     <p>
       <input type="text" value=${this.first_name} />
@@ -34,7 +34,7 @@ class User {
     <p><input type="text" value=${this.number_of_pianos}</p>
     <p><input type="text" value=${this.phone_number}</p>
     <p><input type="text" value=${this.technician_notes}</p>
-   <button data-id=${this.id} input type="submit" name="edit">edit</button>
+   <input data-id=${this.id} type="submit" name="submit">
     <hr>
    </form>`
   }

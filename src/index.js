@@ -10,16 +10,26 @@ document.addEventListener('DOMContentLoaded', function () {
    })
   document.getElementById('user-container').addEventListener('click', (e) => {
      //can't attach the listener to the edit button.
+     if(e.target.matches("button.btn")) { 
+     debugger
      updateUser(e)
+     }
+     
    })
 })
 
 function updateUser(e) {
   const dataId = e.target.dataset.id
   const user = User.findUser(dataId)
+  
   document.getElementById("user-container").innerHTML = user.renderUpdateUser()
   // user form still shows
-}
+  document.getElementById('user-patch-form').addEventListener('submit', e => {
+   
+  e.preventDefault()
+  console.log("THIS WORKS")
+  }
+  )}
 
 function eventFormHandler(e) {
   e.preventDefault()

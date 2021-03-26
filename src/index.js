@@ -8,16 +8,16 @@ document.addEventListener('DOMContentLoaded', function () {
    addUserForm.addEventListener('submit', (e) => {
       eventFormHandler(e)
    })
-  document.getElementById('user-container').addEventListener('click', (e) => {
-     //can't attach the listener to the edit button.
-     if(e.target.matches("button.btn")) { 
-     debugger
-     updateUser(e)
-     }
-     
-   })
+  document.getElementById('user-container').addEventListener('click', e => patchSequence(e))
 })
 
+function patchSequence(e) {
+  document.removeEventListener('click', e => patchSequence(e))
+    //can't attach the listener to the edit button.
+    if(e.target.matches("button.btn")) { 
+      updateUser(e)
+      }
+}
 function updateUser(e) {
   const dataId = e.target.dataset.id
   const user = User.findUser(dataId)
@@ -25,14 +25,28 @@ function updateUser(e) {
   document.getElementById("user-container").innerHTML = user.renderUpdateUser()
   // user form still shows
   document.getElementById('user-patch-form').addEventListener('submit', e => {
-   
   e.preventDefault()
-  console.log("THIS WORKS")
+  patchEventFormHandler(e)
   }
   )}
 
+
+function patchEventFormHandler(e) {
+  e.preventDefault()
+  const id = e.target.dataset.id
+
+  const inputFirstName = document.querySelector('#first-name').value
+  const inputLastName = document.querySelector('#last-name').value
+  const inputAddress = document.querySelector('#address').value
+  const inputPhoneNumber = document.querySelector('#phone-number').value
+  const inputNumberOfPianos = document.querySelector('#number-of-pianos').value
+  const inputNotes = document.querySelector('#notes').value
+  patchUser(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
+}
+
 function eventFormHandler(e) {
   e.preventDefault()
+  const userId = document.querySelector('#data-id')
   const inputFirstName = document.querySelector('#input-first-name').value
   const inputLastName = document.querySelector('#input-last-name').value
   const inputAddress = document.querySelector('#input-address').value
@@ -81,13 +95,21 @@ function createForm() {
   select.appendChild(option)
 }
 
-function patchUser(first_name, last_name, address, phone_number, number_of_pianos, notes) {
+function patchUser(id, first_name, last_name, address, phone_number, number_of_pianos, notes) {
   const bodyData = {first_name, last_name, address, phone_number, number_of_pianos, notes}
-  fetch(endPoint, {
+  fetch(`http://localhost:3000/api/v1/users/${id}`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(bodyData)
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(bodyData),
   })
   .then(resp => resp.json())
-  .then(jsonData => console.log(jsonData))
+  .then(jsonData => {
+    console.log(jsonData)
+    const user = User.findUser(id)
+    getUsers()
+    document.getElementById("user-container").innerHTML = ""
+  })
 }

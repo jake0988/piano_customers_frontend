@@ -25,16 +25,17 @@ class User {
 
   renderUpdateUser() {
     return `
-    <form id="user-patch-form">
+    <form data-id=${this.id} id="user-patch-form">
     <label="First Name">
     <p>
-      <input type="text" value=${this.first_name} />
-      <input type="text" value=${this.last_name} />
+      <input id="first-name" type="text" value=${this.first_name} />
+      <input id="last-name" type="text" value=${this.last_name} />
     </p>
-    <p><input type="text" value=${this.number_of_pianos}</p>
-    <p><input type="text" value=${this.phone_number}</p>
-    <p><input type="text" value=${this.technician_notes}</p>
-   <input data-id=${this.id} type="submit" name="submit">
+    <p><input id="address" type="text" value=${this.address}</p>
+    <p><input id="number-of-pianos" type="text" value=${this.number_of_pianos}</p>
+    <p><input id="phone-number" type="text" value=${this.phone_number}</p>
+    <p><input id="notes" type="text" value=${this.technician_notes}</p>
+   <input data-id=${this.id} type="submit" name="edit">
     <hr>
    </form>`
   }

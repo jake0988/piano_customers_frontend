@@ -11,11 +11,16 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('user-container').addEventListener('click', e => patchSequence(e))
 })
 
+
 function patchSequence(e) {
   document.removeEventListener('click', e => patchSequence(e))
-    //can't attach the listener to the edit button.
+  console.log(e.target)  
+  //can't attach the listener to the edit button.
     if(e.target.matches("button.btn")) { 
       updateUser(e)
+      }
+    else if(e.target.matches("button.dlt-btn")) { 
+      deleteUser(e)
       }
 }
 function updateUser(e) {
@@ -70,6 +75,7 @@ function postFetch(first_name, last_name, address, phone_number, number_of_piano
   const rUser = user.data
   const newUser = new User(rUser, rUser.attributes)
   document.getElementById("user-container").innerHTML += newUser.renderUser()
+  location.reload()
 })
 .catch(err => console.log(err))
 }
@@ -85,6 +91,7 @@ function getUsers() {
         const userContainer = document.getElementById("user-container")
         userContainer.innerHTML += newUser.renderUser()
       })
+      // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
   })
 }
 
@@ -109,7 +116,23 @@ function patchUser(id, first_name, last_name, address, phone_number, number_of_p
   .then(jsonData => {
     console.log(jsonData)
     const user = User.findUser(id)
-    getUsers()
+    location.reload()
     document.getElementById("user-container").innerHTML = ""
   })
+}
+
+function deleteUser(e) {
+  const dataId = e.target.dataset.id
+  fetch(`http://localhost:3000/api/v1/users/${dataId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    }
+  })
+  .then(location.reload())
+  // .then(resp => resp.json())
+  // .then(jsonData => {
+  //   getUsers()
+  // })
 }

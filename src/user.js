@@ -19,6 +19,7 @@ class User {
     <p>Phone Number: ${this.phone_number}</p>
     <p>Technical Notes: ${this.technician_notes}</p>
    <button class="btn" data-id=${this.id} type="submit" name="edit">edit</button>
+   <button class="dlt-btn" data-id=${this.id} type="submit" name="delete">delete</button>
     <hr>
    </div>`
   }

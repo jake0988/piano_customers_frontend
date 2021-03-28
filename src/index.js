@@ -49,6 +49,15 @@ function patchEventFormHandler(e) {
   patchUser(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
 }
 
+function confirmDelete() {
+   if (window.confirm('Are you sure you want to delete this record?')) {
+    return true
+   }
+   else {
+     return false
+   }
+}
+
 function eventFormHandler(e) {
   e.preventDefault()
   const userId = document.querySelector('#data-id')
@@ -122,6 +131,7 @@ function patchUser(id, first_name, last_name, address, phone_number, number_of_p
 }
 
 function deleteUser(e) {
+  if (confirmDelete()) {
   const dataId = e.target.dataset.id
   fetch(`http://localhost:3000/api/v1/users/${dataId}`, {
     method: 'DELETE',
@@ -135,4 +145,5 @@ function deleteUser(e) {
   // .then(jsonData => {
   //   getUsers()
   // })
+}
 }

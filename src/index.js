@@ -89,16 +89,18 @@ function postFetch(first_name, last_name, address, phone_number, number_of_piano
 .catch(err => console.log(err))
 }
 
-function getPianos() {
-  fetch(endPoint)
+function getPianos(user, piano) {
+  fetch(`http://localhost:3000/api/v1/users/${user}/pianos/${piano}`)
     .then(resp => resp.json())
-    .then(pianos => {
+    .then(piano => {
       const pianoContainer = document.getElementById("user-container")
       pianoContainer.innerHTML = ""
-      pianos.data.forEach(piano => {
-        let newPiano = new Piano(piano, piano.attributes)
+      debugger
+      let pianos = piano.data
+      // pianos.data.forEach(piano => {
+        let newPiano = new Piano(pianos, pianos.attributes)
         pianoContainer.innerHTML += newPiano.renderPiano()
-      })
+      // })
       // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
   })
 }

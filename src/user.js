@@ -6,7 +6,7 @@ class User {
     this.address = usersAttributes.address
     this.phone_number = usersAttributes.phone_number
     this.notes = usersAttributes.notes
-    this.number_of_pianos = usersAttributes.number_of_pianos
+    this.number_of_pianos = usersAttributes.pianos.length
     User.all.push(this)
   }
 
@@ -15,7 +15,7 @@ class User {
     <div data-id=${this.id}>
     <h3>Name: ${this.first_name} ${this.last_name}</h3>
     <p>Address: ${this.address}</p>
-    <p>Number Of Pianos: ${this.number_of_pianos}</p>
+    <p>Number Of Pianos: <a id=number-of-pianos>${this.number_of_pianos}</a></p>
     <p>Phone Number: ${this.phone_number}</p>
     <p>Technical Notes: ${this.technician_notes}</p>
    <button class="btn" data-id=${this.id} type="submit" name="edit">edit</button>

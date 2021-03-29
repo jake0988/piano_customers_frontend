@@ -95,15 +95,38 @@ function getPianos(user, piano) {
     .then(piano => {
       const pianoContainer = document.getElementById("user-container")
       pianoContainer.innerHTML = ""
-      debugger
+      const pianoForm = document.querySelector('div.form-container')
+      pianoForm.innerHTML = Piano.addPiano()
       let pianos = piano.data
       // pianos.data.forEach(piano => {
         let newPiano = new Piano(pianos, pianos.attributes)
         pianoContainer.innerHTML += newPiano.renderPiano()
       // })
       // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
+      pianoContainer.addEventListener('click', e => {
+      if(e.target.type == "submit") {
+      deletePiano(piano.data.attributes.user.id, piano.data.id)
+      }
+      })
   })
 }
+
+function deletePiano(user, piano) {
+  if (confirmDelete()) {
+    fetch(`http://localhost:3000/api/v1/users/${user}/pianos/${piano}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }
+    })
+    .then(location.reload())
+    // .then(resp => resp.json())
+    // .then(jsonData => {
+    //   getUsers()
+    // })
+  }
+  }
 
 
 function getUsers() {

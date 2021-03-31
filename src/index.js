@@ -58,21 +58,6 @@ function confirmDelete() {
    }
 }
 
-function pianoEventFormHandler(user) {
-  const container = document.querySelector('div.form-container')
-  container.addEventListener('click', e => {
-    if(e.target.type == 'submit') {
-  const user_id = user
-  const make = container.querySelector('#user-id')
-  const model = container.querySelector('#model')
-  const serial = container.querySelector('#serial')
-  const age = container.querySelector('#age')
-  const notes = container.querySelector('#notes')
-  const image_url = container.querySelector('#image_url')
-  postPianoFetch(user_id, make, model, serial, age, notes, image_url)
-}
-})
-}
 
 function eventFormHandler(e) {
   e.preventDefault()
@@ -106,7 +91,7 @@ function postFetch(first_name, last_name, address, phone_number, number_of_piano
 }
 
 function postPianoFetch(user_id, make, model, serial, age, private_technical_notes, image_url) {
-  const bodyData = {make, model, serial, age, private_technical_notes, image_url}
+  const bodyData = {make, model, serial, age, private_technical_notes, image_url, user_id}
   fetch(`http://localhost:3000/api/v1/users/${user_id}/pianos/`, {
   method: 'POST',
   headers: {
@@ -115,16 +100,16 @@ function postPianoFetch(user_id, make, model, serial, age, private_technical_not
   body: JSON.stringify(bodyData) 
 })
 .then(resp => resp.json())
-.then(user => {
-  const rUser = user.data
-  const newUser = new User(rUser, rUser.attributes)
-  document.getElementById("user-container").innerHTML += newUser.renderUser()
+.then(piano => {
+  const rPiano = piano.data
+  const newPiano = new Piano(rPiano, rPiano.attributes)
+  document.getElementById("piano-container").innerHTML += newPiano.renderPiano()
   location.reload()
 })
 .catch(err => console.log(err))
 }
 
-function pianoForm() {
+function deletePianolistener() {
   const pianoContainer = document.getElementById("user-container")
       pianoContainer.innerHTML = ""
   pianoContainer.addEventListener('click', e => {
@@ -134,23 +119,53 @@ function pianoForm() {
     })
 }
 
-function getPianos(user, piano) {
-  pianoForm()
+function createPianoForm(user) {
+  const pianoForm = document.querySelector('div.form-container')
+  pianoForm.innerHTML = Piano.addPiano()
   pianoEventFormHandler(user)
-  fetch(`http://localhost:3000/api/v1/users/${user}/pianos/${piano}`)
-    .then(resp => resp.json())
-    .then(piano => {
-      const pianoForm = document.querySelector('div.form-container')
-      pianoForm.innerHTML = Piano.addPiano()
-      if(piano.data) {
-      let pianos = piano.data
-      // pianos.data.forEach(piano => {
-        let newPiano = new Piano(pianos, pianos.attributes)
-        pianoContainer.innerHTML += newPiano.renderPiano()
-      // })
-      // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
-      }
+}
+
+function showPianos(pianos) {
+  const div = document.createElement('div') 
+  div.id = "piano-div"
+  if(pianos.data) {
+  // let pianos = piano.data
+  pianos.data.forEach(piano => {
+    let newPiano = new Piano(piano, piano.attributes)
+    div.innerHTML += newPiano.renderPiano()
+    // debugger
   })
+  }
+}
+
+function getPianos(user, piano) {
+ 
+  fetch(`http://localhost:3000/api/v1/users/${user}/pianos/`)
+    .then(resp => resp.json())
+    .then(pianos => {
+      
+      createPianoForm(user)
+      showPianos(pianos) 
+      })
+  
+  
+}
+
+function pianoEventFormHandler(user) {
+  const container = document.querySelector('div.form-container')
+  container.addEventListener('click', e => {
+    preventDefault()
+    if(e.target.type == 'submit') {
+  const user_id = user
+  const make = container.querySelector('#user-id')
+  const model = container.querySelector('#model')
+  const serial = container.querySelector('#serial')
+  const age = container.querySelector('#age')
+  const notes = container.querySelector('#notes')
+  const image_url = container.querySelector('#image_url')
+  postPianoFetch(user_id, make, model, serial, age, notes, image_url)
+}
+})
 }
 
 function deletePiano(user, piano) {

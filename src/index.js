@@ -39,13 +39,13 @@ function updateUser(e) {
 function patchEventFormHandler(e) {
   e.preventDefault()
   const id = e.target.dataset.id
-
-  const inputFirstName = document.querySelector('#first-name').value
-  const inputLastName = document.querySelector('#last-name').value
-  const inputAddress = document.querySelector('#address').value
-  const inputPhoneNumber = document.querySelector('#phone-number').value
-  const inputNumberOfPianos = document.querySelector('#number-of-pianos').value
-  const inputNotes = document.querySelector('#notes').value
+  const patchContainer = document.querySelector('#user-patch-form')
+  const inputFirstName = patchContainer.querySelector('#fname').value
+  const inputLastName = patchContainer.querySelector('#lname').value
+  const inputAddress = patchContainer.querySelector('#address').value
+  const inputPhoneNumber = patchContainer.querySelector('#pnumber').value
+  const inputNumberOfPianos = patchContainer.querySelector('#npianos').value
+  const inputNotes = patchContainer.querySelector('#notes').value
 
   patchUser(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
 }
@@ -111,12 +111,12 @@ function postPianoFetch(user_id, make, model, serial, age, private_technical_not
 .catch(err => console.log(err))
 }
 
-function deletePianolistener() {
-  const pianoContainer = document.getElementById("user-container")
-      pianoContainer.innerHTML = ""
+function deletePianolistener(piano) {
+  const pianoContainer = document.querySelector("#piano-div")
+      // pianoContainer.innerHTML = ""
   pianoContainer.addEventListener('click', e => {
     if(e.target.type == "submit") {
-    deletePiano(piano.data.attributes.user.id, piano.data.id)
+    deletePiano(piano.attributes.user_id, piano.id)
     }
     })
 }
@@ -144,6 +144,7 @@ function showPianos(pianos) {
     pianos.data.forEach(piano => {
     let newPiano = new Piano(piano, piano.attributes)
     div.innerHTML += newPiano.renderPiano()
+    deletePianolistener(piano)
     // return div
     // debugger
   })

@@ -27,16 +27,27 @@ class User {
   renderUpdateUser() {
     return `
     <form data-id=${this.id} id="user-patch-form">
-    <label="First Name">
-    <p>
-      <input id="first-name" type="text" value=${this.first_name} />
-      <input id="last-name" type="text" value=${this.last_name} />
-    </p>
-    <p><input id="address" type="text" value=${this.address}</p>
-    <p><input id="number-of-pianos" type="text" value=${this.number_of_pianos}</p>
-    <p><input id="phone-number" type="text" value=${this.phone_number}</p>
-    <p><input id="notes" type="text" value=${this.technician_notes}</p>
-   <input data-id=${this.id} type="submit" name="edit">
+    <label for="fname">First Name:</label>
+      <input id="fname" type="text" value=${this.first_name} />
+    <br>
+    <label for="lname">Last Name:</label>
+      <input id="lname" type="text" value=${this.last_name} />
+    <br>
+    <label for="address">Address:</label>
+    <br>
+      <input id="address" type="text" value=${this.address}
+    <br>
+    <label for="npianos">Number of Pianos:</label>
+      <input id="npianos" type="text" value=${this.number_of_pianos}
+    <br>
+    <label for="pnumber">Phone Number:</label>
+      <input id="pnumber" type="text" value=${this.phone_number}
+    <br>
+    <label for="notes">Notes:</label>
+      <input id="notes" type="text" value=${this.technician_notes}
+    <br>
+    <br>
+      <input data-id=${this.id} type="submit" name="edit">
     <hr>
    </form>`
   }

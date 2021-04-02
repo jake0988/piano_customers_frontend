@@ -7,6 +7,7 @@ class User {
     this.phone_number = usersAttributes.phone_number
     this.notes = usersAttributes.notes
     this.number_of_pianos = usersAttributes.pianos.length
+    // this.appointments = appointments(usersAttributes.appointments)
     User.all.push(this)
   }
 
@@ -18,7 +19,8 @@ class User {
     <p>Number Of Pianos: <a href="javascript:getPianos(${this.id}, ${this.number_of_pianos}) "id=number-of-pianos>${this.number_of_pianos}</a></p>
     <p>Phone Number: ${this.phone_number}</p>
     <p>Technical Notes: ${this.technician_notes}</p>
-   <button class="btn" data-id=${this.id} type="submit" name="edit">edit</button>
+    <!--<p>Appointments: ${this.appointments}</p>-->
+    <button class="btn" data-id=${this.id} type="submit" name="edit">edit</button>
    <button class="dlt-btn" data-id=${this.id} type="submit" name="delete">delete</button>
     <hr>
    </div>`

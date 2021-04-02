@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('user-container').addEventListener('click', e => patchSequence(e))
 })
 
+function appointments(appoints) {
+  debugger
+}
 
 function patchSequence(e) {
   document.removeEventListener('click', e => patchSequence(e))

@@ -137,7 +137,8 @@ function pianoEventFormHandler(user) {
   const notes = container.querySelector('#notes').value
   const image_url = container.querySelector('#image_url').value
   // debugger
-  postPianoFetch(user_id, make, model, serial, age, notes, image_url)
+  const fetching = new Fetching;
+  fetching.postPianoFetch(user_id, make, model, serial, age, notes, image_url)
 // }
 // })
 }

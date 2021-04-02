@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('user-container').addEventListener('click', e => patchSequence(e))
 })
 
-function appointments(appoints) {
-  debugger
-}
 
 function patchSequence(e) {
   document.removeEventListener('click', e => patchSequence(e))
@@ -72,46 +69,8 @@ function eventFormHandler(e) {
   const inputPhoneNumber = document.querySelector('#input-phone-number').value
   const inputNumberOfPianos = document.querySelector('#input-number-of-pianos').value
   const inputNotes = document.querySelector('#input-notes').value
-  postFetch(inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
-}
-
-function postFetch(first_name, last_name, address, phone_number, number_of_pianos, notes) {
-  const bodyData = {first_name, last_name, address, phone_number, number_of_pianos, notes}
-  fetch(endPoint, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(bodyData) 
-})
-.then(resp => resp.json())
-.then(user => {
-  const rUser = user.data
-  const newUser = new User(rUser, rUser.attributes)
-  document.getElementById("user-container").innerHTML += newUser.renderUser()
-  location.reload()
-})
-.catch(err => console.log(err))
-}
-
-function postPianoFetch(user_id, make, model, serial, age, private_technical_notes, image_url) {
-  const bodyData = {make, model, serial, age, private_technical_notes, image_url, user_id}
-  fetch(`http://localhost:3000/api/v1/users/${user_id}/pianos/`, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(bodyData) 
-})
-.then(resp => resp.json())
-.then(piano => {
-  const rPiano = piano.data
-  const newPiano = new Piano(rPiano, rPiano.attributes)
-  document.getElementById("piano-container").innerHTML += newPiano.renderPiano()
-  // debugger
-  // location.reload()
-})
-.catch(err => console.log(err))
+  const fetching = new Fetching
+  fetching.postFetch(inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
 }
 
 function deletePianolistener(piano) {
@@ -202,8 +161,8 @@ function deletePiano(user, piano) {
 
 
 function getUsers() {
-  fetch(endPoint)
-    .then(resp => resp.json())
+  const adapter = new Adapter 
+  adapter.fetchCustomers()
     .then(users => {
       users.data.forEach(user => {
         let newUser = new User(user, user.attributes)

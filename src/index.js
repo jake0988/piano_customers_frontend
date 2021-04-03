@@ -50,14 +50,7 @@ function patchEventFormHandler(e) {
   patchUser(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
 }
 
-function confirmDelete() {
-   if (window.confirm('Are you sure you want to delete this record?')) {
-    return true
-   }
-   else {
-     return false
-   }
-}
+
 
 
 function eventFormHandler(e) {
@@ -78,7 +71,8 @@ function deletePianolistener(piano) {
       // pianoContainer.innerHTML = ""
   pianoContainer.addEventListener('click', e => {
     if(e.target.type == "submit") {
-    deletePiano(piano.attributes.user_id, piano.id)
+      const adapter = new Adapter
+      adapter.deletePiano(piano.attributes.user_id, piano.id)
     }
     })
 }
@@ -143,24 +137,6 @@ function pianoEventFormHandler(user) {
 // })
 }
 
-function deletePiano(user, piano) {
-  if (confirmDelete()) {
-    fetch(`http://localhost:3000/api/v1/users/${user}/pianos/${piano}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      }
-    })
-    .then(location.reload())
-    // .then(resp => resp.json())
-    // .then(jsonData => {
-    //   getUsers()
-    // })
-  }
-  }
-
-
 function getUsers() {
   const adapter = new Adapter 
   adapter.fetchCustomers()
@@ -201,7 +177,7 @@ function patchUser(id, first_name, last_name, address, phone_number, number_of_p
 }
 
 function deleteUser(e) {
-  if (confirmDelete()) {
+
   const dataId = e.target.dataset.id
   fetch(`http://localhost:3000/api/v1/users/${dataId}`, {
     method: 'DELETE',
@@ -215,5 +191,4 @@ function deleteUser(e) {
   // .then(jsonData => {
   //   getUsers()
   // })
-}
 }

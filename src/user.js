@@ -14,6 +14,7 @@ class User {
     return `
     <div data-id=${this.id}>
     <h3>Name: ${this.first_name} ${this.last_name}</h3>
+    <p>Email: ${this.email}</p>
     <p>Address: ${this.address}</p>
     <p>Number Of Pianos: <a href="javascript:getPianos(${this.id})"id=number-of-pianos>${this.number_of_pianos}</a></p>
     <p>Phone Number: ${this.phone_number}</p>
@@ -33,6 +34,9 @@ class User {
     <br>
     <label for="lname">Last Name:</label>
       <input id="lname" type="text" value=${this.last_name} />
+    <br>
+    <label for="email">Email:</label>
+      <input id="email" type="text" value=${this.email} />
     <br>
     <label for="address">Address:</label>
     <br>

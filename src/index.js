@@ -1,7 +1,9 @@
 const endPoint = "http://localhost:3000/api/v1/users"
 
 document.addEventListener('DOMContentLoaded', function () {
-    getUsers()
+    // getUsers()
+    const fetching = new Fetching
+    fetching.getFetch()
     // createForm()
    const addUserForm = document.querySelector('#add-user-form')
    
@@ -46,8 +48,8 @@ function patchEventFormHandler(e) {
   const inputPhoneNumber = patchContainer.querySelector('#pnumber').value
   const inputNumberOfPianos = patchContainer.querySelector('#npianos').value
   const inputNotes = patchContainer.querySelector('#notes').value
-
-  patchUser(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
+  const fetching = new Fetching
+  fetching.patchFetch(id, inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
 }
 
 
@@ -137,18 +139,18 @@ function pianoEventFormHandler(user) {
 // })
 }
 
-function getUsers() {
-  const adapter = new Adapter 
-  adapter.fetchCustomers()
-    .then(users => {
-      users.data.forEach(user => {
-        let newUser = new User(user, user.attributes)
-        const userContainer = document.getElementById("user-container")
-        userContainer.innerHTML += newUser.renderUser()
-      })
-      // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
-  })
-}
+// function getUsers() {
+//   const adapter = new Adapter 
+//   adapter.fetchCustomers()
+//     .then(users => {
+//       users.data.forEach(user => {
+//         let newUser = new User(user, user.attributes)
+//         const userContainer = document.getElementById("user-container")
+//         userContainer.innerHTML += newUser.renderUser()
+//       })
+//       // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
+//   })
+// }
 
 function createForm() {
   const select = document.querySelector("#pianos")

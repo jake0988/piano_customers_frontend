@@ -1,7 +1,8 @@
 const endPoint = "http://localhost:3000/api/v1/users"
 
 document.addEventListener('DOMContentLoaded', function () {
-    // getUsers()
+    // const adapter = new Adapter
+    // adapter.fetchAdmin()
     const fetching = new Fetching
     fetching.getFetch()
     // createForm()

@@ -68,7 +68,8 @@ function createPianoForm(user) {
 
 function showPianos(pianos) {
   // const div = document.createElement('div') 
-  const div = document.querySelector('div#piano-container')
+  // debugger
+  const div = document.querySelector('#picture')
 
   div.id = "piano-div"
   if(pianos.data) {
@@ -87,38 +88,6 @@ function getPianos(user) {
   const fetching = new Fetching;
   fetching.getPianosFetch(user)
 }
-
-// function pianoEventFormHandler(user) {
-//   const container = document.querySelector('div.form-container')
-//   // container.addEventListener('click', e => {
-//   //   preventDefault()
-//   //   if(e.target.type == 'submit') {
-//   const user_id = user
-//   const make = container.querySelector('#make').value
-//   const model = container.querySelector('#model').value
-//   const serial = container.querySelector('#serial').value
-//   const age = container.querySelector('#age').value
-//   const notes = container.querySelector('#notes').value
-//   const image_url = container.querySelector('#image_url').value
-//   // debugger
-//   const fetching = new Fetching;
-//   fetching.postPianoFetch(user_id, make, model, serial, age, notes, image_url)
-// // }
-// // })
-// }
-
-// function getUsers() {
-//   const adapter = new Adapter 
-//   adapter.fetchCustomers()
-//     .then(users => {
-//       users.data.forEach(user => {
-//         let newUser = new User(user, user.attributes)
-//         const userContainer = document.getElementById("user-container")
-//         userContainer.innerHTML += newUser.renderUser()
-//       })
-//       // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
-//   })
-// }
 
 function createForm() {
   const select = document.querySelector("#pianos")

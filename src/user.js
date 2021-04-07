@@ -14,6 +14,7 @@ class User {
     return `
     <div data-id=${this.id}>
     <h3>Name: ${this.first_name} ${this.last_name}</h3>
+    <div id="picture"></div>
     <p>Email: ${this.email}</p>
     <p>Address: ${this.address}</p>
     <p>Number Of Pianos: <a href="javascript:getPianos(${this.id})"id=number-of-pianos>${this.number_of_pianos}</a></p>

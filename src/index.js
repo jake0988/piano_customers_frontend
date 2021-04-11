@@ -95,3 +95,56 @@ function createForm() {
   option.innerText = "OPTION"
   select.appendChild(option)
 }
+
+function loginForm() {
+  const form = document.querySelector('.login-form');
+  form.innerHTML = "";
+  const username = document.createElement('input');
+  username.setAttribute('placeholder', 'username');
+  username.setAttribute("type", "text");
+  username.setAttribute("id", "username");
+  username.setAttribute("class", "form-control");
+  form.appendChild(username);
+  const password = document.createElement('input');
+  password.setAttribute('placeholder', 'password');
+  password.setAttribute("type", "text");
+  password.setAttribute("id", "password");
+  password.setAttribute("class", "form-control");
+  form.appendChild(password);
+  const button = document.createElement('input');
+  button.setAttribute('type', "submit");
+  button.setAttribute('value', "login");
+  button.setAttribute("class", "btn btn-primary");
+  button.setAttribute("id", "login");
+  button.name = "submit";
+  form.appendChild(button);
+  form.addEventListener('click', (e) => {
+    if(e.target.value === "login") {
+    const uName = document.querySelector("#username").value
+    const pWord = document.querySelector("#password").value
+    const adapter = new Adapter
+    adapter.fetchLoginForm(uName, pWord)
+  }
+  })
+}
+
+function createAdmin {
+  const form = document.querySelector('.login-form')
+  form.addEventListener('click', (e) => {
+    if (e.target.value === "submit") {
+      const username = document.querySelector('#username').value
+      const email = document.querySelector('#email').value
+      const password = document.querySelector('#password').value
+      const adapter = new Adapter
+      adapter.fetchCreateAdmin(username, email, password)
+    }
+  })
+}
+
+function inputAddOns(form, input, word) {
+  input.setAttribute('placeholder', word);
+  input.setAttribute("type", "text");
+  input.setAttribute("class", "form-control");
+  form.appendChild(input);
+}
+  

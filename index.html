@@ -42,15 +42,20 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search by last name..">
+      <div class="login-form">
+        <h1>Create Admin:</h1>
+        <input type="text" id="username" class="form-control" placeholder="Create Username..">
+        <input type="text" id="email" class="form-control" placeholder="Enter Email..">
+        <input type="text" id="password" class="form-control" placeholder="Create Password..">
         <span class="input-group-btn">
           <button class="btn btn-default" type="button">
             <span class="glyphicon glyphicon-search"></span>
           </button>
         </span>
+        <a href="javascript:loginForm()"><h3>...or login</h3></a>
       </div>
-    
+     
+
     <div class="form-container">
     <form id="add-user-form">
      <h3>Add a Customer!</h3>

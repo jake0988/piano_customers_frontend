@@ -26,10 +26,9 @@ renderPiano() {
     <p>Piano Model: ${this.model}</p>
     <p>Piano Serial Number: ${this.serial}</p>
     <p>Piano Age: ${this.age}</p>
-    <img src="${this.image_url}"</p>
+    <img src="${this.image_url}" alt="Piano" width="250" height="250">
     <p>Piano Notes: ${this.private_technical_notes}</p>
     <input data-id="${this.id}" type="submit" value="Delete">
-    <hr>
   </div>
   
   </div>

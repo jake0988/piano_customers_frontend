@@ -3,8 +3,9 @@ const endPoint = "http://localhost:3000/api/v1/users"
 document.addEventListener('DOMContentLoaded', function () {
     // const adapter = new Adapter
     // adapter.fetchAdmin()
-    const fetching = new Fetching
-    fetching.getFetch()
+    // const fetching = new Fetching
+    // fetching.getFetch()
+    createAdmin()
     // createForm()
    const addUserForm = document.querySelector('#add-user-form')
    
@@ -12,6 +13,14 @@ document.addEventListener('DOMContentLoaded', function () {
      const app = new App
      app.eventFormHandler(e)
    })
+   const form = document.querySelector('.login-form');
+   const adapter = new Adapter
+   form.addEventListener('submit', (e) => {
+    const username = form.querySelector('#username').value
+    const email = form.querySelector('#email').value
+    const password = form.querySelector('#password').value
+    adapter.fetchCreateAdmin(username, email, password)
+    })
   document.getElementById('user-container').addEventListener('click', e => patchSequence(e))
 })
 
@@ -128,7 +137,7 @@ function loginForm() {
   })
 }
 
-function createAdmin {
+function createAdmin() {
   const form = document.querySelector('.login-form')
   form.addEventListener('click', (e) => {
     if (e.target.value === "submit") {

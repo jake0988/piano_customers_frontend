@@ -7,23 +7,40 @@ class Adapter {
     };
   }
 
-  
-  fetchCreateAdmin(username, email, password) {
-    const body = {username, email, password}
-    fetch('http://localhost:3000/api/v1/admin', {
-  method: 'POST',
+  fetchRenderAdmin() {
+    fetch('http://localhost:3000/api/v1/profile', {
+  method: 'GET',
   headers: {
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-    // Authorization: `Bearer <token>`
+    Authorization: `Bearer ${localStorage.getItem('jwt_token')}`
   },
   body: JSON.stringify(body)
 })
   .then(r => r.json())
+
+  .then(alert(`Welcome back ${json.admin.data.attributes.username}`))
+}
+
+
+  fetchCreateAdmin(username, email, password) {
+    const body = {admin: {username, email, password}}
+    // debugger
+    fetch('http://localhost:3000/api/v1/admins', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify(body)
+})
+  .then(r => {  
+    debugger
+    return r.json().catch(err => console.log("this errr", err))})
   
-  .then(console.log)
+  .then(json => {
+    debugger
+  localStorage.setItem('jwt_token', json.jwt)
+  this.fetchRenderAdmin()
+  })
+  .catch(err => console.log("YOUR ERRORS", err))
+}
   
-  }
   
   fetchLoginForm(uName, pWord) {
     const body = {admin: {uName, pWord}}
@@ -38,7 +55,9 @@ class Adapter {
 })
   .then(r => r.json())
 
-  // .then(console.log)
+  .then(json => {
+    console.log(json)
+  })
   
   }
   

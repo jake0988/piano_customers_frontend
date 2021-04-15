@@ -2,8 +2,8 @@ class Adapter {
   constructor() {
     this.baseUrl = 'http://localhost:3000/api/v1/users';
     this.headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
+      'Content-Type': 'application/json'
+      // Accept: 'application/json'
     };
   }
   
@@ -13,8 +13,8 @@ class Adapter {
   }
 
 
-  fetchPostCustomer(body) {
-    return this.post(`${this.baseUrl}`, body);
+  fetchPostCustomer(bodyData) {
+    return this.post(`${this.baseUrl}`, bodyData);
   }
 
   fetchPatchCustomer(id, body) {
@@ -32,6 +32,17 @@ class Adapter {
   fetchPostPiano(user_id, body) {
     return this.post(`${this.baseUrl}/${user_id}/pianos`, body);
   }
+  
+  fetchDelete(user) {
+    // const wind = window
+    // if (confirmDelete(wind)) {
+      this.delete(`${this.baseUrl}/${user}`)
+
+    .then(user => {
+      location.reload()
+  })
+}
+
 
   deletePiano(user, piano) {
     // const wind = window
@@ -40,18 +51,8 @@ class Adapter {
 
     .then(location.reload())
   // }
-}
+  }
   
-  fetchDelete(user) {
-    // const wind = window
-    // if (confirmDelete(wind)) {
-      this.delete(`${this.baseUrl}/${user}`)
-
-    .then(location.reload())
-  // }
-}
-
-
   post(url, body) {
     return fetch(url, {
       method: 'POST',

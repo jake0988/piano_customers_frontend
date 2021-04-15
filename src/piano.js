@@ -16,22 +16,30 @@ class Piano {
 renderPiano() {
   return `
   <div data-id=${this.id}>
-  
+  <div id=piano-${this.id}>
   <div>
     <p>Piano Owner: ${this.first_name} ${this.last_name}</p>
   </div>
 
   <div>
-    <p>Piano Make: ${this.make}</p>
-    <p>Piano Model: ${this.model}</p>
-    <p>Piano Serial Number: ${this.serial}</p>
-    <p>Piano Age: ${this.age}</p>
-    <img src="${this.image_url}"</p>
-    <p>Piano Notes: ${this.private_technical_notes}</p>
-    <input data-id="${this.id}" type="submit" value="Delete">
+  <div class="media">
+      <img class="mr-3" src="${this.image_url}" alt="Piano picture">
+    </div>
+  <div class="media-body">
+    <ul>
+      <li>Piano Make: ${this.make}</li>
+      <li>Piano Model: ${this.model}</li>
+    <li>Piano Serial Number: ${this.serial}</li>
+    <li>Piano Age: ${this.age}</li>
+    
+    <li>Piano Notes: ${this.private_technical_notes}</li>
+    </ul>
+    <a href="javascript:hidePiano(${this.id}, false)">Hide Piano</a>
+    <input data-id="${this.id}" type="submit" value="Delete Piano">
+    <div
     <hr>
   </div>
-  
+  </div>
   </div>
   `
 }
@@ -40,7 +48,7 @@ static addPiano() {
   return `
   <form user-id="${this.user_id}">
   <h3>Add a Piano!</h3>
-  <input type="text" id="make" placeholder="make" value="" name="make">
+  ̰<input type="text" id="make" placeholder="make" value="" name="make">
   <input type="text" id="model" placeholder="model" value="" name="model">
   <input type="text" id="serial" placeholder="serial" value="" name="serial">
   <input type="text" id="age" placeholder="age" value="" name="age">

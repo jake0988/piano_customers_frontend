@@ -8,12 +8,16 @@ class App {
       const inputFirstName = document.querySelector('#input-first-name').value
       const inputLastName = document.querySelector('#input-last-name').value
       const inputEmail = document.querySelector('#input-email').value
-      const inputAddress = document.querySelector('#input-address').value
+      const inputAddress1 = document.querySelector('#inputAddress').value
+      const inputAddress2 = document.querySelector('#inputAddress2').value
+      const inputAddress3 = document.querySelector('#inputCity').value
+      const inputAddress4 = document.querySelector('#inputState').value
+      const inputAddress5 = document.querySelector('#inputZip').value
+      const inputAddress = `${inputAddress1} ${inputAddress2}, ${inputAddress3}, ${inputAddress4}, ${inputAddress5}`
       const inputPhoneNumber = document.querySelector('#input-phone-number').value
-      const inputNumberOfPianos = document.querySelector('#input-number-of-pianos').value
       const inputNotes = document.querySelector('#input-notes').value
       const fetching = new Fetching
-      fetching.postFetch(inputFirstName, inputLastName, inputAddress, inputPhoneNumber,inputNumberOfPianos, inputNotes)
+      fetching.postFetch(inputFirstName, inputLastName, inputEmail, inputPhoneNumber, inputAddress, inputNotes)
   }
   
     pianoEventFormHandler(user) {

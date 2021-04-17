@@ -53,9 +53,9 @@ function deletePianolistener(piano) {
     })
 }
 
-function createPianoForm(user) {
+function createPianoForm(user, first, last) {
   const pianoForm = document.querySelector('div.form-container')
-  pianoForm.innerHTML = Piano.addPiano()
+  pianoForm.innerHTML = Piano.addPiano(first, last)
   const container = document.querySelector('div.form-container')
   container.addEventListener('click', e => {
     
@@ -83,15 +83,21 @@ function showPianos(pianos, user) {
   }
 }
 
-function hidePiano(piano, visible) {
-  debugger
-  const pianoData = document.querySelector(`div[data-id="${piano}"]`)
-   pianoData.style.visibility = (visible ? 'visible' : 'hidden');
+function hidePiano(piano, visible, self) {
+  
+  const pianoData = document.querySelector(`div[data-id="${piano}"]`);
+   pianoData.style.visibility = (visible ? 'visible' : pianoData.innerHTML = "");
+  
 }
 
-function getPianos(user) {
+function getPianos(id, first, last, self) {
+  debugger
+  const form = document.querySelector('.form-container')
+  const p = document.createElement('p')
+  p.innerText = `Add Piano For ${first} ${last}`
+  form.prepend(p)
   const fetching = new Fetching;
-  fetching.getPianosFetch(user)
+  fetching.getPianosFetch(id, first, last)
 }
 
 

@@ -3,10 +3,10 @@ class Fetching {
     this.adapter = new Adapter;
   }
 
-getPianosFetch(user) {
+getPianosFetch(user, first, last) {
   this.adapter.fetchGetPianos(user)
   .then(pianos => {
-    createPianoForm(user)
+    createPianoForm(user, first, last)
     showPianos(pianos, user) 
     })
     .catch((err) => console.log("Your errors", err))
@@ -42,8 +42,9 @@ getPianosFetch(user) {
   .then(user => {
     const rUser = user.data;
     const newUser = new User(rUser, rUser.attributes);
-    document.getElementById("user-container").innerHTML += newUser.renderUser();
     debugger
+    document.getElementById("user-container").innerHTML += newUser.renderUser();
+  
     // location.reload()
   })
   .catch(err => console.log("Your errors", err));

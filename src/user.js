@@ -11,13 +11,18 @@ class User {
   }
 
     renderUser() {
+      const first = this.first_name
+      const last = this.last_name
+      const self = this
+      // const boundSelf = bind.self
+      
     return `
     <div data-id=${this.id}>
       <h3>Name: ${this.first_name} ${this.last_name}</h3>
       <ul>
        <li>Email: ${this.email}</li>
        <li><address>Address: ${this.address}</address></li>
-       <li>Number Of Pianos: <a href="javascript:getPianos(${this.id})"id=number-of-pianos>${this.number_of_pianos}</a></li>
+       <li>Number Of Pianos: <a href="javascript:getPianos(${this.id}, '${first}', '${last}', '${self}')"id=number-of-pianos>${this.number_of_pianos}</a></li>
        <li>Phone Number: ${this.phone_number}</li>
        <li>Technical Notes: ${this.technician_notes}</li>
       </ul>

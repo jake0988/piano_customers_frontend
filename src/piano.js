@@ -15,6 +15,9 @@ class Piano {
 
 renderPiano() {
   return `
+  <div id="show-piano-${this.id}">
+  <a href="javascript:hidePiano(${this.id}, true)">Show Piano</a>
+  </div>
   <div data-id=${this.id}>
   <div id=piano-${this.id}>
   <div>
@@ -35,6 +38,7 @@ renderPiano() {
     <li>Piano Notes: ${this.private_technical_notes}</li>
     </ul>
     <a href="javascript:hidePiano(${this.id}, false)">Hide Piano</a>
+    
     <input data-id="${this.id}" type="submit" value="Delete Piano">
     <div
     <hr>
@@ -44,19 +48,40 @@ renderPiano() {
   `
 }
 
-static addPiano() {
+static addPiano(first, last) {
   return `
   <form user-id="${this.user_id}">
-  <h3>Add a Piano!</h3>
-  ̰<input type="text" id="make" placeholder="make" value="" name="make">
-  <input type="text" id="model" placeholder="model" value="" name="model">
-  <input type="text" id="serial" placeholder="serial" value="" name="serial">
-  <input type="text" id="age" placeholder="age" value="" name="age">
+  <h3>Add a Piano for ${first} ${last}!</h3>
+  <form-group>
+  <label for="make">Make</label>
+  ̰<input type="text" class="form-control" id="make" placeholder="make" value="" name="make">
+ </form-group> 
+ <br>
+ <form-group>
+ <label for="model">Model</label>
+ <input type="text" class="form-control" id="model" placeholder="model" value="" name="model">
+ </form-group>
+ <br>
+ <form-group> 
+ <label for="serial">Serial</label>
+ <input type="text" class="form-control" id="serial" placeholder="serial" value="" name="serial">
+ </form-group> 
+ <br>
+ <form-group>
+ <label for="age">Age</label>
+ <input type="text" class="form-control" id="age" placeholder="age" value="" name="age">
+ </form-group> 
+ <br>
+ <form-group>
+ <label for="notes">Notes</label>
+  <textarea type="text" class="form-control" id="notes" placeholder="notes" value="" name="notes"></textarea>
+  </form-group>
   <br>
-  <textarea type="text" id="notes" placeholder="notes" value="" name="notes"></textarea>
+  <form-group>
+  <label for="image-url">Image url</label>
+  <input type="text" class="form-control" id="image_url" placeholder="image_link" rows="8" cols="80" value="" name="image_url">
   <br>
-  <input type="text" id="image_url" placeholder="image_link" rows="8" cols="80" value="" name="image_url">
-  <br>
+  </form-group>
   <input type="submit" value="Add Piano" name="add piano">
   </form>
   `

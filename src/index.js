@@ -43,7 +43,7 @@ function updateUser(e) {
 
 
 function deletePianolistener(piano) {
-  const pianoContainer = document.querySelector("#piano-div")
+  const pianoContainer = document.querySelector(`#piano-${piano.id}`)
       // pianoContainer.innerHTML = ""
   pianoContainer.addEventListener('click', e => {
     if(e.target.type == "submit") {
@@ -53,9 +53,9 @@ function deletePianolistener(piano) {
     })
 }
 
-function createPianoForm(user) {
+function createPianoForm(user, first, last) {
   const pianoForm = document.querySelector('div.form-container')
-  pianoForm.innerHTML = Piano.addPiano()
+  pianoForm.innerHTML = Piano.addPiano(first, last)
   const container = document.querySelector('div.form-container')
   container.addEventListener('click', e => {
     
@@ -66,9 +66,9 @@ function createPianoForm(user) {
 })
 }
 
-function showPianos(pianos) {
+function showPianos(pianos, user) {
   // const div = document.createElement('div') 
-  const div = document.querySelector('div#piano-container')
+  const div = document.querySelector(`#piano-container-${user}`)
 
   div.id = "piano-div"
   if(pianos.data) {
@@ -83,42 +83,23 @@ function showPianos(pianos) {
   }
 }
 
-function getPianos(user) {
-  const fetching = new Fetching;
-  fetching.getPianosFetch(user)
+function hidePiano(piano, visible, self) {
+  
+  const pianoData = document.querySelector(`div[data-id="${piano}"]`);
+   pianoData.style.visibility = (visible ? 'visible' : pianoData.innerHTML = "");
+  
 }
 
-// function pianoEventFormHandler(user) {
-//   const container = document.querySelector('div.form-container')
-//   // container.addEventListener('click', e => {
-//   //   preventDefault()
-//   //   if(e.target.type == 'submit') {
-//   const user_id = user
-//   const make = container.querySelector('#make').value
-//   const model = container.querySelector('#model').value
-//   const serial = container.querySelector('#serial').value
-//   const age = container.querySelector('#age').value
-//   const notes = container.querySelector('#notes').value
-//   const image_url = container.querySelector('#image_url').value
-//   // debugger
-//   const fetching = new Fetching;
-//   fetching.postPianoFetch(user_id, make, model, serial, age, notes, image_url)
-// // }
-// // })
-// }
+function getPianos(id, first, last, self) {
+  debugger
+  const form = document.querySelector('.form-container')
+  const p = document.createElement('p')
+  p.innerText = `Add Piano For ${first} ${last}`
+  form.prepend(p)
+  const fetching = new Fetching;
+  fetching.getPianosFetch(id, first, last)
+}
 
-// function getUsers() {
-//   const adapter = new Adapter 
-//   adapter.fetchCustomers()
-//     .then(users => {
-//       users.data.forEach(user => {
-//         let newUser = new User(user, user.attributes)
-//         const userContainer = document.getElementById("user-container")
-//         userContainer.innerHTML += newUser.renderUser()
-//       })
-//       // .catch(errors => console.log("THESE ARE YOUR ERRORS", errors))
-//   })
-// }
 
 function createForm() {
   const select = document.querySelector("#pianos")

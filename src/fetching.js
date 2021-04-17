@@ -3,11 +3,11 @@ class Fetching {
     this.adapter = new Adapter;
   }
 
-getPianosFetch(user) {
+getPianosFetch(user, first, last) {
   this.adapter.fetchGetPianos(user)
   .then(pianos => {
-    createPianoForm(user)
-    showPianos(pianos) 
+    createPianoForm(user, first, last)
+    showPianos(pianos, user) 
     })
     .catch((err) => console.log("Your errors", err))
 }
@@ -36,26 +36,28 @@ getPianosFetch(user) {
     .catch(err => console.log("Your errors", err));
   }
 
-  postFetch(first_name, last_name, address, phone_number, number_of_pianos, technician_notes) {
-    const bodyData = {first_name, last_name, address, phone_number, number_of_pianos, technician_notes};
+  postFetch(first_name, last_name, email, phone_number, address, technician_notes) {
+    const bodyData = {first_name, last_name, email, phone_number, address, technician_notes};
     this.adapter.fetchPostCustomer(bodyData)
   .then(user => {
     const rUser = user.data;
     const newUser = new User(rUser, rUser.attributes);
+    debugger
     document.getElementById("user-container").innerHTML += newUser.renderUser();
+  
     // location.reload()
   })
   .catch(err => console.log("Your errors", err));
   }
 
   postPianoFetch(user_id, make, model, serial, age, private_technical_notes, image_url) {
-      const bodyData = {make, model, serial, age, private_technical_notes, image_url, user_id};
+      const bodyData = {user: {make, model, serial, age, private_technical_notes, image_url, user_id}};
       this.adapter.fetchPostPiano(user_id, bodyData)
     .then(piano => {
       const rPiano = piano.data;
       const newPiano = new Piano(rPiano, rPiano.attributes);
       document.getElementById("piano-container").innerHTML += newPiano.renderPiano();
-      // debugger
+
       // location.reload();
   })
     .catch(err => console.log("Your errors", err))
